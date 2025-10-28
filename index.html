@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>汤雨静 - 个人主页</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif;
+        }
+
+        :root {
+            --primary: #6d5dfc;
+            --secondary: #43cea2;
+            --accent: #ff6b6b;
+            --light: #f8f9fa;
+            --dark: #2d3748;
+            --text: #4a5568;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #e4edf5 100%);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* 导航栏样式 */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 0;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+
+        .nav-links li {
+            margin-left: 30px;
+            position: relative;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: var(--transition);
+            padding: 8px 0;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* 英雄区域样式 */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 100px 0 80px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(109, 93, 252, 0.1), rgba(67, 206, 162, 0.1));
+            z-index: -1;
+        }
+
+        .hero-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .hero-text {
+            animation: fadeInLeft 1s ease;
+        }
+
+        .hero-text h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            line-height: 1.2;
+        }
+
+        .hero-text p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        .profile-img-container {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            animation: fadeInRight 1s ease;
+        }
+
+        .profile-frame {
+            width: 350px;
+            height: 350px;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow);
+            animation: morphing 10s ease-in-out infinite;
+        }
+
+        .profile-img {
+            width: 320px;
+            height: 320px;
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            object-fit: cover;
+            border: 5px solid white;
+            transition: var(--transition);
+        }
+
+        /* 关于我区域样式 */
+        .about {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .about::before {
+            content: '';
+            position: absolute;
+            bottom: -50%;
+            left: -20%;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(255, 107, 107, 0.1), rgba(67, 206, 162, 0.1));
+            z-index: -1;
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: center;
+        }
+
+        .about-image {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            transform: perspective(1000px) rotateY(-5deg);
+            transition: var(--transition);
+        }
+
+        .about-image:hover {
+            transform: perspective(1000px) rotateY(0);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: var(--transition);
+        }
+
+        .about-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 25px;
+            color: var(--dark);
+            position: relative;
+            display: inline-block;
+        }
+
+        .about-text h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+        }
+
+        .info-list {
+            list-style: none;
+            margin-top: 25px;
+        }
+
+        .info-list li {
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+        }
+
+        .info-list i {
+            color: var(--primary);
+            margin-right: 12px;
+            font-size: 1.2rem;
+            width: 24px;
+            text-align: center;
+        }
+
+        /* 时间轴样式 */
+        .timeline {
+            margin-top: 40px;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 20px;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--primary), var(--secondary));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 30px;
+            padding-left: 60px;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 12px;
+            top: 5px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 4px solid white;
+            box-shadow: 0 0 0 3px var(--primary);
+        }
+
+        .timeline-date {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        /* 兴趣爱好区域样式 */
+        .hobbies {
+            padding: 100px 0;
+            background: white;
+            position: relative;
+        }
+
+        .hobbies::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -20%;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, rgba(109, 93, 252, 0.05), rgba(67, 206, 162, 0.05));
+            z-index: 0;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--dark);
+            display: inline-block;
+            position: relative;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 2px;
+        }
+
+        .hobbies-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .hobby-card {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+        }
+
+        .hobby-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+
+        .hobby-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .hobby-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hobby-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--dark);
+        }
+
+        /* 照片墙区域样式 */
+        .gallery {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .gallery-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            height: 250px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: var(--transition);
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .add-photo {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f8f9fa, #e9ecef);
+            border: 2px dashed var(--primary);
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .add-photo:hover {
+            background: linear-gradient(135deg, #e9ecef, #dee2e6);
+            transform: scale(1.05);
+        }
+
+        .add-photo i {
+            font-size: 3rem;
+            color: var(--primary);
+            margin-bottom: 15px;
+        }
+
+        /* 联系区域样式 */
+        .contact {
+            padding: 100px 0;
+            background: white;
+            position: relative;
+        }
+
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-item i {
+            font-size: 1.5rem;
+            color: var(--primary);
+            margin-right: 15px;
+            width: 40px;
+            height: 40px;
+            background: rgba(109, 93, 252, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 45px;
+            height: 45px;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            border-radius: 50%;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(109, 93, 252, 0.3);
+        }
+
+        .contact-form {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 15px;
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(109, 93, 252, 0.1);
+        }
+
+        .btn {
+            padding: 15px 30px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: var(--transition);
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-size: 1rem;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(109, 93, 252, 0.3);
+        }
+
+        /* 页脚样式 */
+        footer {
+            background: var(--dark);
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+        }
+
+        /* 照片上传样式 */
+        .photo-upload-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+        }
+
+        .photo-upload-box {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+        }
+
+        .upload-preview {
+            max-width: 100%;
+            max-height: 300px;
+            margin: 20px 0;
+            border-radius: 10px;
+            display: none;
+        }
+
+        .upload-actions {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .btn-secondary {
+            background: #e2e8f0;
+            color: var(--dark);
+        }
+
+        .btn-secondary:hover {
+            background: #cbd5e0;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        /* 动画 */
+        @keyframes fadeInLeft {
+            from {
+                opacity: 0;
+                transform: translateX(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes morphing {
+            0% {
+                border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            }
+            25% {
+                border-radius: 58% 42% 75% 25% / 76% 46% 54% 24%;
+            }
+            50% {
+                border-radius: 50% 50% 33% 67% / 55% 27% 73% 45%;
+            }
+            75% {
+                border-radius: 33% 67% 58% 42% / 63% 68% 32% 37%;
+            }
+            100% {
+                border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            }
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 992px) {
+            .hero-content,
+            .about-content,
+            .contact-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .hero-text h1 {
+                font-size: 2.8rem;
+            }
+
+            .profile-frame {
+                width: 300px;
+                height: 300px;
+            }
+
+            .profile-img {
+                width: 270px;
+                height: 270px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .hero-text h1 {
+                font-size: 2.3rem;
+            }
+
+            .profile-frame {
+                width: 250px;
+                height: 250px;
+            }
+
+            .profile-img {
+                width: 220px;
+                height: 220px;
+            }
+
+            .section-title h2 {
+                font-size: 2rem;
+            }
+
+            .hobbies-container {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 导航栏 -->
+    <header>
+        <div class="container">
+            <nav class="navbar">
+                <div class="logo">汤雨静</div>
+                <ul class="nav-links">
+                    <li><a href="#home">首页</a></li>
+                    <li><a href="#about">关于我</a></li>
+                    <li><a href="#hobbies">兴趣爱好</a></li>
+                    <li><a href="#gallery">照片墙</a></li>
+                    <li><a href="#contact">联系我</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- 英雄区域 -->
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-text">
+                    <h1>汤雨静<br><span style="font-size: 2.5rem;">扬州大学 & 主持表演爱好者</span></h1>
+                    <p>用声音传递情感，用热情点亮舞台</p>
+                    <button class="btn" onclick="scrollToSection('about')">了解更多</button>
+                </div>
+                <div class="profile-img-container">
+                    <div class="profile-frame">
+                        <img src="证件照.jpg" alt="个人照片" class="profile-img" id="profileImg">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 关于我区域 -->
+    <section class="about" id="about">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="77.jpg" alt="关于我" id="aboutImage">
+                </div>
+                <div class="about-text">
+                    <h2>关于我</h2>
+                    <p>我是一名充满热情的扬州大学新闻与传媒学院教育技术学（师范）专业的大二学生，热爱生活，喜欢唱歌主持。我出生于江苏省淮安市，周总理的故乡；长于中国第四大淡水湖洪泽湖的湖边，从小深受总理的精神以及广阔的湖水的影响，逐渐长成了一个正直乐观、三观端正的社会青年。</p>
+                    <p>我是我们学院学生会的部长，负责承办学院各项活动;我还是校艺术团主持人队的一员，积极参与校内各项主持活动，还结交到了非常多志同道合的朋友。</p>
+                    
+                    <div class="timeline">
+                        <h3 style="margin-bottom: 20px; color: var(--dark);">获奖经历</h3>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2025年5月</div>
+                            <div class="timeline-content">扬州大学新闻与传媒学院第二十届传媒文化艺术节"石榴抱籽传薪火，融媒聚力绘新篇"主题演讲比赛"一等奖"</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2024年11月</div>
+                            <div class="timeline-content">扬州大学新闻与传媒学院第十九届传媒文化艺术节"激扬青春，以辩会友"辩论赛"一等奖"</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2024年11月</div>
+                            <div class="timeline-content">扬州大学第六届"声动青春，持梦前行"主持人大赛中"优秀奖"</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2024年11月</div>
+                            <div class="timeline-content">扬州大学新闻与传媒学院"声临其境，演绎精彩"话剧社配音大赛"三等奖"</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2024年10月</div>
+                            <div class="timeline-content">扬州大学2024级新生"唱响校歌，畅想青春"校歌合唱比赛"优秀个人"</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2024年9月</div>
+                            <div class="timeline-content">扬州大学化学化工学院魅力主持人比赛"一等奖"</div>
+                        </div>
+                        <div class="timeline-item">
+                            <div class="timeline-date">2024年9月</div>
+                            <div class="timeline-content">新闻与传媒学院新生才艺大赛"三等奖"</div>
+                        </div>
+                    </div>
+                    
+                    <ul class="info-list">
+                        <li><i class="fas fa-birthday-cake"></i>出生日期: 2006年7月18日</li>
+                        <li><i class="fas fa-map-marker-alt"></i> 出生地: 江苏淮安</li>
+                        <li><i class="fas fa-graduation-cap"></i> 学历: 扬州大学本科在读</li>
+                        <li><i class="fas fa-award"></i> 证书: 大学英语四级、普通话二级甲等</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 兴趣爱好区域 -->
+    <section class="hobbies" id="hobbies">
+        <div class="container">
+            <div class="section-title">
+                <h2>兴趣爱好</h2>
+            </div>
+            <div class="hobbies-container">
+                <div class="hobby-card">
+                    <div class="hobby-icon">
+                        <i class="fas fa-microphone"></i>
+                    </div>
+                    <h3>主持</h3>
+                    <p>我喜欢用声音传递情感，我喜欢每一次站在台上说的"亲爱的观众朋友们，大家晚上好！"</p>
+                </div>
+                <div class="hobby-card">
+                    <div class="hobby-icon">
+                        <i class="fas fa-plane"></i>
+                    </div>
+                    <h3>旅行</h3>
+                    <p>探索新的地方，体验不同的文化，旅行让我开阔眼界，丰富人生经历。</p>
+                </div>
+                <div class="hobby-card">
+                    <div class="hobby-icon">
+                        <i class="fas fa-paw"></i>
+                    </div>
+                    <h3>宠物</h3>
+                    <p>我喜欢猫猫狗狗，这些毛茸茸治愈了我的人生，看到它们我就觉得很幸福，也希望全世界的毛孩子都能得到善待。</p>
+                </div>
+                <div class="hobby-card">
+                    <div class="hobby-icon">
+                        <i class="fas fa-chalkboard-teacher"></i>
+                    </div>
+                    <h3>教育</h3>
+                    <p>教育不仅是我目前的就业方向，也是我想用来影响身边人的工具，希望我能成为对世界有用的人。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 照片墙区域 -->
+    <section class="gallery" id="gallery">
+        <div class="container">
+            <div class="section-title">
+                <h2>照片墙</h2>
+            </div>
+            <div class="gallery-container" id="galleryContainer">
+                <div class="gallery-item">
+                    <img src="11.jpg" alt="自然风光">
+                </div>
+                <div class="gallery-item">
+                    <img src="10.jpg" alt="山脉">
+                </div>
+                <div class="gallery-item">
+                    <img src="99.jpg" alt="城市夜景">
+                </div>
+                <div class="gallery-item">
+                    <img src="111.jpg" alt="星空">
+                </div>
+                 <div class="gallery-item">
+                    <img src="15.jpg" alt="自然风光">
+                </div>
+               <div class="gallery-item">
+                    <img src="14.jpg" alt="自然风光">
+                </div>
+
+
+                <div class="gallery-item add-photo" onclick="openPhotoUpload()">
+                    <i class="fas fa-plus-circle"></i>
+                    <p>添加照片</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 联系区域 -->
+    <section class="contact" id="contact">
+        <div class="container">
+            <div class="section-title">
+                <h2>联系我</h2>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h3>邮箱</h3>
+                            <p>3052779863@qq.com</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h3>电话</h3>
+                            <p>+86 137 7672 3957</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <div>
+                            <h3>地址</h3>
+                            <p>江苏省扬州市扬州大学荷花池校区</p>
+                        </div>
+                    </div>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-weibo"></i></a>
+                        <a href="#"><i class="fab fa-weixin"></i></a>
+                        <a href="#"><i class="fab fa-github"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form id="contactForm">
+                        <div class="form-group">
+                            <input type="text" placeholder="您的姓名" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" placeholder="您的邮箱" required>
+                        </div>
+                        <div class="form-group">
+                            <textarea placeholder="您的留言" rows="5" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">发送消息</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 汤雨静的个人主页. 保留所有权利.</p>
+        </div>
+    </footer>
+
+    <!-- 照片上传模态框 -->
+    <div class="photo-upload-container" id="photoUploadContainer">
+        <div class="photo-upload-box">
+            <h3>添加新照片</h3>
+            <input type="file" id="photoFileInput" accept="image/*" style="margin: 20px 0;">
+            <img id="uploadPreview" class="upload-preview" alt="预览">
+            <div class="upload-actions">
+                <button class="btn btn-secondary" onclick="closePhotoUpload()">取消</button>
+                <button class="btn" onclick="addPhotoToGallery()">添加到照片墙</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // 平滑滚动函数
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // 照片上传功能
+        function openPhotoUpload() {
+            document.getElementById('photoUploadContainer').style.display = 'flex';
+        }
+
+        function closePhotoUpload() {
+            document.getElementById('photoUploadContainer').style.display = 'none';
+            document.getElementById('photoFileInput').value = '';
+            document.getElementById('uploadPreview').style.display = 'none';
+        }
+
+        // 预览选择的照片
+        document.getElementById('photoFileInput').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const preview = document.getElementById('uploadPreview');
+                    preview.src = event.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // 添加照片到照片墙
+        function addPhotoToGallery() {
+            const fileInput = document.getElementById('photoFileInput');
+            const file = fileInput.files[0];
+            
+            if (!file) {
+                alert('请先选择一张照片');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const galleryContainer = document.getElementById('galleryContainer');
+                const addPhotoBtn = document.querySelector('.add-photo');
+                
+                // 创建新的照片项
+                const newPhotoItem = document.createElement('div');
+                newPhotoItem.className = 'gallery-item';
+                newPhotoItem.innerHTML = `<img src="${event.target.result}" alt="新添加的照片">`;
+                
+                // 在添加按钮前插入新照片
+                galleryContainer.insertBefore(newPhotoItem, addPhotoBtn);
+                
+                // 关闭上传窗口
+                closePhotoUpload();
+                
+                alert('照片已成功添加到照片墙！');
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // 联系表单提交
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('感谢您的留言！我会尽快回复您。');
+            this.reset();
+        });
+
+        // 导航链接点击事件
+        document.querySelectorAll('.nav-links a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const targetId = this.getAttribute('href').substring(1);
+                scrollToSection(targetId);
+            });
+        });
+
+        // 页面加载完成后的初始化
+        window.addEventListener('load', function() {
+            console.log('个人主页加载完成！');
+        });
+    </script>
+</body>
+</html>
